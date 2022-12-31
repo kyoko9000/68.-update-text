@@ -9,6 +9,11 @@ from gui1 import Ui_Dialog
 class second_gui(QDialog, Ui_Dialog):
     def __init__(self):
         super().__init__()
+        self.setupUi(self)
+        self.pushButton.clicked.connect(self.jj)
+
+    def jj(self):
+        print("it run")
 
 
 class MainWindow(QMainWindow):
@@ -22,6 +27,7 @@ class MainWindow(QMainWindow):
 
     def load_ui(self):
         self.ui = second_gui()
+        self.ui.exec()
     #     self.ui = QDialog()
     #     self.s = Ui_Dialog()
     #     self.s.setupUi(self.ui)
