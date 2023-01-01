@@ -16,23 +16,10 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>170</y>
-     <width>131</width>
+     <x>100</x>
+     <y>160</y>
+     <width>181</width>
      <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>20</y>
-     <width>231</width>
-     <height>101</height>
     </rect>
    </property>
    <property name="font">
@@ -41,7 +28,7 @@
     </font>
    </property>
    <property name="text">
-    <string>qdialog</string>
+    <string>PushButton</string>
    </property>
   </widget>
  </widget>
