@@ -6,36 +6,35 @@ from gui import Ui_MainWindow
 from gui1 import Ui_Dialog
 
 
-class second_gui(QDialog, Ui_Dialog):
+class second_screen(QDialog, Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.jj)
+        self.pushButton.clicked.connect(self.text)
 
-    def jj(self):
-        print("it run")
+    def text(self):
+        print("ok")
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.s = None
         self.ui = None
+        self.second_s = None
         self.uic = Ui_MainWindow()
         self.uic.setupUi(self)
-        self.uic.pushButton.clicked.connect(self.load_ui)
+        self.uic.pushButton.clicked.connect(self.show_screen)
 
-    def load_ui(self):
-        self.ui = second_gui()
-        self.ui.exec()
-    #     self.ui = QDialog()
-    #     self.s = Ui_Dialog()
-    #     self.s.setupUi(self.ui)
-    #     self.s.pushButton.clicked.connect(self.hh)
-    #     self.ui.exec()
-    #
-    # def hh(self):
-    #     print("ok")
+    def show_screen(self):
+        # self.second_s = QDialog()
+        # self.ui = Ui_Dialog()
+        # self.ui.setupUi(self.second_s)
+        # self.ui.pushButton.clicked.connect(self.text)
+        # self.second_s.exec()
+
+        self.second_s = second_screen()
+        self.second_s.exec()
+
 
 
 if __name__ == "__main__":
