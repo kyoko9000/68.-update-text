@@ -50,13 +50,12 @@ class process_work():
     def __init__(self, q, index):
         super().__init__()
 
-        count = random.randint(0, 10)
+        count = random.randint(0, 20)
         for i in range(index):
             count += 1
 
-        print("progress", index)
         a = [count, count, count]
-        print(f'value{index}', a)
+        print("progress:", index, a)
         q.put(a)
 
 
