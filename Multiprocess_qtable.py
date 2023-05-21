@@ -1,3 +1,4 @@
+import random
 import sys
 import time
 from multiprocessing import Queue, Process
@@ -48,9 +49,14 @@ class live_stream(QThread):
 class process_work():
     def __init__(self, q, index):
         super().__init__()
-        for i in range(2):
-            print("progress", index)
-        a = [1+index, 2+index, 3+index]
+
+        count = random.randint(0, 10)
+        for i in range(index):
+            count += 1
+
+        print("progress", index)
+        a = [count, count, count]
+        print(f'value{index}', a)
         q.put(a)
 
 
