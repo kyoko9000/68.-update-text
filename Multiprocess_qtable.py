@@ -1,6 +1,5 @@
 import random
 import sys
-import time
 from multiprocessing import Queue, Process
 
 from PyQt5.QtCore import QThread, pyqtSignal
