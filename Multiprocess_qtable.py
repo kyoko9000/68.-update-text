@@ -54,7 +54,7 @@ class process_work():
         for i in range(index):
             count += 1
 
-        a = [count, count, count]
+        a = [count, count]
         print("progress:", index, a)
         q.put(a)
 
