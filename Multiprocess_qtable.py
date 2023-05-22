@@ -43,7 +43,6 @@ class live_stream(QThread):
             self.signal.emit("run", self.index)
             # print same numbers in arbitrary order
             for i in pool.imap_unordered(process_work, [self.index]):
-                # print(i)
                 self.signal.emit(i, self.index)
 
 
@@ -55,7 +54,6 @@ def process_work(index):
         print("progress:", index, count)
         if count == 20:
             break
-
     a = [count, "finish"]
     print("progress:", index, a)
     return a
