@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.thread = {}
 
     def start_capture_video(self):
-        for i in range(4):
+        for i in range(3):
             self.thread[i] = live_stream(index=i)
             self.thread[i].start()
             self.thread[i].signal.connect(self.show_wedcam)
@@ -40,6 +40,7 @@ class live_stream(QThread):
 
     def run(self):
         with Pool(processes=4) as pool:
+            self.signal.emit("run", self.index)
             # print same numbers in arbitrary order
             for i in pool.imap_unordered(process_work, [self.index]):
                 # print(i)
@@ -55,7 +56,7 @@ def process_work(index):
         if count == 20:
             break
 
-    a = [count, count]
+    a = [count, "finish"]
     print("progress:", index, a)
     return a
 
