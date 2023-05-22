@@ -1,6 +1,7 @@
 import random
 import sys
-from multiprocessing import Queue, Process
+import time
+from multiprocessing import Queue, Process, Pool
 
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
@@ -38,24 +39,25 @@ class live_stream(QThread):
         super(live_stream, self).__init__()
 
     def run(self):
-        q = Queue()
-        p = Process(target=process_work, args=(q, self.index))
-        p.start()
-        text = (q.get())
-        self.signal.emit(text, self.index)
+        with Pool(processes=4) as pool:
+            # print same numbers in arbitrary order
+            for i in pool.imap_unordered(process_work, [self.index]):
+                # print(i)
+                self.signal.emit(i, self.index)
 
 
-class process_work():
-    def __init__(self, q, index):
-        super().__init__()
+def process_work(index):
+    count = random.randint(0, 5)
+    for i in range(20):
+        time.sleep(0.2)
+        count += 1
+        print("progress:", index, count)
+        if count == 20:
+            break
 
-        count = random.randint(0, 20)
-        for i in range(index):
-            count += 1
-
-        a = [count, count]
-        print("progress:", index, a)
-        q.put(a)
+    a = [count, count]
+    print("progress:", index, a)
+    return a
 
 
 if __name__ == "__main__":
