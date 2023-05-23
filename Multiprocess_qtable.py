@@ -20,7 +20,7 @@ class MainWindow(QMainWindow):
         self.thread = {}
 
     def start_capture_video(self):
-        for i in range(3):
+        for i in range(4):
             self.thread[i] = live_stream(index=i)
             self.thread[i].start()
             self.thread[i].signal.connect(self.show_wedcam)
