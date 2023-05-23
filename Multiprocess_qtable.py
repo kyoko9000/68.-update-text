@@ -1,7 +1,7 @@
 import random
 import sys
 import time
-from multiprocessing import Queue, Process, Pool
+from multiprocessing import Pool
 
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QTableWidgetItem
