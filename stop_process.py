@@ -18,7 +18,20 @@ class MainWindow(QMainWindow):
 
         self.uic.pushButton.clicked.connect(self.start_capture_video)
 
+        self.pushButton_1 = QtWidgets.QPushButton(self.uic.centralwidget)
+        self.pushButton_1.setGeometry(QtCore.QRect(250, 270, 191, 61))
+        font = QtGui.QFont()
+        font.setPointSize(20)
+        self.pushButton_1.setFont(font)
+        self.pushButton_1.setObjectName("pushButton_1")
+        self.pushButton_1.setText("Button")
+
+        self.pushButton_1.clicked.connect(self.stop_process)
+
         self.thread = {}
+
+    def stop_process(self):
+        self.thread[1].stop_select()
 
     def start_capture_video(self):
         for i in range(4):
@@ -45,6 +58,9 @@ class live_stream(QThread):
             # print same numbers in arbitrary order
             for i in pool.imap_unordered(process_work, [self.index]):
                 self.signal.emit(i, self.index)
+
+    def stop_select(self):
+        print("stop process: ", self.index)
 
 
 def process_work(index):
