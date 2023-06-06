@@ -31,7 +31,10 @@ class MainWindow(QMainWindow):
         self.thread = {}
 
     def stop_process(self):
+        self.thread[0].stop_select()
         self.thread[1].stop_select()
+        # self.thread[2].stop_select()
+        # self.thread[3].stop_select()
 
     def start_capture_video(self):
         for i in range(4):
@@ -53,14 +56,15 @@ class live_stream(QThread):
         super(live_stream, self).__init__()
 
     def run(self):
-        with Pool(processes=4) as pool:
+        with Pool(processes=4) as self.pool:
             self.signal.emit("run", self.index)
             # print same numbers in arbitrary order
-            for i in pool.imap_unordered(process_work, [self.index]):
+            for i in self.pool.imap_unordered(process_work, [self.index]):
                 self.signal.emit(i, self.index)
 
     def stop_select(self):
-        print("stop process: ", self.index)
+        print("command process stop: ", self.index)
+        self.pool.terminate()
 
 
 def process_work(index):
