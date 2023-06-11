@@ -24,19 +24,23 @@ class MainWindow(QMainWindow):
         font.setPointSize(20)
         self.pushButton_1.setFont(font)
         self.pushButton_1.setObjectName("pushButton_1")
-        self.pushButton_1.setText("Button")
+        self.pushButton_1.setText("Stop")
 
         self.pushButton_1.clicked.connect(self.stop_process)
 
         self.thread = {}
+        self.num_thread = 4
 
     def stop_process(self):
         self.thread[0].stop_select()
         self.thread[1].stop_select()
         # self.thread[2].stop_select()
         # self.thread[3].stop_select()
+        # for i in range(self.num_thread):
+        #     self.thread[i].stop_select()
 
     def start_capture_video(self):
+        # for i in range(self.num_thread):
         for i in range(4):
             self.thread[i] = live_stream(index=i)
             self.thread[i].start()
@@ -65,11 +69,12 @@ class live_stream(QThread):
     def stop_select(self):
         print("command process stop: ", self.index)
         self.pool.terminate()
+        self.signal.emit("stop", self.index)
 
 
 def process_work(index):
     count = random.randint(0, 5)
-    for i in range(20):
+    while True:
         time.sleep(0.2)
         count += 1
         print("progress:", index, count)
