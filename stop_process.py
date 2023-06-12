@@ -29,13 +29,15 @@ class MainWindow(QMainWindow):
         self.pushButton_1.clicked.connect(self.stop_process)
 
         self.thread = {}
-        self.num_thread = 4
+
+        # self.num_thread = 3
 
     def stop_process(self):
         self.thread[0].stop_select()
         self.thread[1].stop_select()
         # self.thread[2].stop_select()
         # self.thread[3].stop_select()
+
         # for i in range(self.num_thread):
         #     self.thread[i].stop_select()
 
@@ -46,6 +48,7 @@ class MainWindow(QMainWindow):
             self.thread[i].start()
             self.thread[i].signal.connect(self.show_wedcam)
 
+    #
     def show_wedcam(self, text, index):
         self.uic.tableWidget.setItem(index, 0, QTableWidgetItem(str(text)))
         self.uic.label.setText(str(text))
